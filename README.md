@@ -1,4 +1,4 @@
-# dotfiles
+# configFiles
 
 .bashrc, .emacs, .tmux.conf, etc.
 
@@ -13,5 +13,9 @@ To set up symlinks, see the example below:
 
 ```bash
 cd 
-ln -s /path/to/dotfiles/.tmux.conf .tmux.conf
+ln -s /path/to/configFiles/.tmux.conf .tmux.conf
 ```
+
+## Attribution
+
+Thanks to Micah Smith and Matt Cocci for the majority of the useful stuff here.
