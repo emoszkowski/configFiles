@@ -1,0 +1,12 @@
+pdf=evince
+eps=evince
+txt=emacs -nw
+sh=emacs -nw
+tex=emacs -nw
+md=emacs -nw
+doc=openoffice.org
+docx=openoffice.org
+do=emacs -nw
+m=emacs -nw
+py=emacs -nw
+jl=emacs -nw
