@@ -34,14 +34,18 @@
 (setq tab-width 4) ; 4 spaces per tab
 (defvaralias 'c-basic-offset 'tab-width)
 
-;; ess, for running julia/R/etc from inside emacs 
-(load "~/ESS/lisp/ess-site.el")
-(setq inferior-julia-program-name "/usr/local/bin/julia-0.4")
 
-(add-to-list 'load-path "~/ESS/lisp/")
-(load "ess-site")
+;; Julia mode
+(add-to-list 'load-path "~/.emacsconfig/julia-emacs")
+(require 'julia-mode)
 
-;;matlab formatting
+;; ESS, for running julia/R/etc from inside emacs 
+(load "~/.emacsconfig/ESS/lisp/ess-site.el")
+(setq inferior-julia-program-name "/usr/local/bin/julia-0.4.2")
+(add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
+
+
+;;MATLAB formatting
 (add-to-list 'load-path "~/.emacs.d/")
 (load "matlab.el")
 
