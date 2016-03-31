@@ -49,6 +49,16 @@ then
 fi 
 
 
+# Setup Jawn
+if [ ! -d ~/Jawn ]; 
+then 
+    mkdir -p ~/Jawn
+    git clone https://github.com/MattCocci/Jawn.git ~/Jawn
+ else 
+    echo "$SCRIPTNAME: Jawn already installed" 
+fi
+
+
 ### Dotfiles
 for FILE in .bashrc .emacs .tmux.conf .gitconfig;
 do
