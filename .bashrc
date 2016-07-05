@@ -1,5 +1,8 @@
 # .bashrc
 
+# Random stuff
+stty -ixon       # Disable <C-s> that hangs terminal
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -14,7 +17,7 @@ source ~/.aliases
 # User specific aliases and functions
 alias ..='cd ..'
 alias ...='cd ../..'
-alias dropbox='cd ~/Dropbox'
+alias dbox='cd ~/Dropbox'
 
 # Run emacs in the terminal
 alias emacs='emacs -nw'
