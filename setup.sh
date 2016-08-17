@@ -35,6 +35,13 @@ then
     echo "$SCRIPTNAME: ESS already installed" 
 fi 
 
+# markdown mode
+if [ ! -d ~/.emacsconfig/markdown-mode ]; 
+then 
+    mkdir -p ~/.emacsconfig/markdown-mode
+    git clone https://github.com/jrblevin/markdown-mode.git ~/.emacsconfig/markdown-mode
+fi 
+# Grip 
 
 
 ### Bash setup 

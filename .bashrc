@@ -22,6 +22,10 @@ alias dbox='cd ~/Dropbox'
 # Run emacs in the terminal
 alias emacs='emacs -nw'
 
+# Make emacs syntax highlighting work properly. 
+# DO NOT set to cygwin, or emacs display gets messed up...
+export TERM="xterm-256color"
+
 # Change what ls displays
 alias ls='\ls --color'
 alias l='\ls -AF --color'
