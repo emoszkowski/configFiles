@@ -106,14 +106,16 @@
 (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
 (defun my-matlab-mode-hook ()
 (setq matlab-indent-function t) ; if you want function bodies indented
-(setq fill-column 76) ; where auto-fill should wrap
+(setq fill-column 80) ; where auto-fill should wrap
 (turn-on-auto-fill))
 (setq matlab-mode-hook 'my-matlab-mode-hook)
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 (defun my-matlab-shell-mode-hook ()
 '())
 (setq matlab-mode-hook 'my-matlab-mode-hook)
-
+; let me comment things out and format nicely in matlab
+(add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
+(add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-q" nil)))
 
 ;; lunate epsilon
 (define-key key-translation-map (kbd "<f9> e <right>") (kbd "ϵ"))
