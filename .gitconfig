@@ -1,14 +1,20 @@
 [user]
 	name = Erica Moszkowski
 	email = erica.moszkowski@gmail.com
+[github]
+	emoszkowski
 [alias]
+	br  = branch
+	ch  = checkout
+	co  = commit
 	d   = difftool  
 	d   = difftool -g  
-	dc  = difftool  
+	dc  = difftool
+	gr  = grep  
 	logp = log --graph --all --full-history --color --pretty=format:'%C(yellow)%h%Creset%x09%Cblue%d%Creset %s <%an>'  
 	lg  = log --graph --all --full-history --color --abbrev-commit --decorate  
-	m   = mergetool  
-	br  = branch
+	m   = mergetool --tool=meld 
+	st  = status
 [core]
 [core]
 	editor = emacs -nw
@@ -16,9 +22,9 @@
 	excludesfile = /home/rceexm08/.gitignore_global
 [url "https://"]
 	insteadOf = git://
+	pushInsteadOf = git://
 [branch]
 	autosetuprebase = always
-	autosetupmerge = always
 [merge]
 	tool = meld
 	
@@ -27,3 +33,5 @@
 [diff]
 	tool = ediff
 	guitool = meld
+[difftool]
+	prompt = false
