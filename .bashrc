@@ -40,6 +40,10 @@ source "${GITAWAREPROMPT}/main.sh" 2>/dev/null
 # export PS1="\[$(tput setaf 4)\][\[$(tput setaf 4)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 2)\]\W\[$(tput setaf 4)\] \[$ "
 export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
 
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gcm='git commit -m'
 
 #Better log viewing in Git, from Henry and Micah
 alias githist='git log --graph --all --full-history --color --format=oneline --branches --abbrev-commit'
