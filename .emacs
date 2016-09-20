@@ -120,3 +120,7 @@
 ;; lunate epsilon
 (define-key key-translation-map (kbd "<f9> e <right>") (kbd "ϵ"))
 
+;; uniquify buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style (quote post-forward-angle-brackets))
+
