@@ -28,11 +28,20 @@
 ;; always end a file with a newline
 ;(setq require-final-newline 'query)
 
+;; Misc
+(setq echo-keystrokes 0.1  ; Reduce time to echo keystrokes
+      use-dialog-box nil   ; No dialog boxes
+      visible-bell t)      ; No beeping
+
+;; highlight parentheses
+(show-paren-mode t)
+
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
 
 ;; line numbers
 (global-linum-mode t) 
+(global-set-key (kbd "C-x l") 'linum-mode)  ; turn off with C-x l
 
 ;; tabs
 (setq tab-width 4) ; 4 spaces per tab
@@ -124,3 +133,5 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style (quote post-forward-angle-brackets))
 
+;; unbind C-o for tmux compatibility 
+(global-unset-key (kbd "C-o"))
