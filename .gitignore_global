@@ -1,0 +1,17 @@
+# Code Coverage #
+#################
+*.cov
+
+
+# Backup files #
+################
+*.bak
+*.orig
+*~
+
+# Gross LaTeX Things #
+######################
+*.aux
+*.out
+*.log
+*.toc

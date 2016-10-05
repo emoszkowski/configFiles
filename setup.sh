@@ -67,7 +67,7 @@ fi
 
 
 ### Dotfiles
-for FILE in .bashrc .emacs .tmux.conf .gitconfig;
+for FILE in .bashrc .emacs .tmux.conf .gitconfig .gitignore_global;
 do
     if [ ! -h "$HOME/$FILE" ];
     then
