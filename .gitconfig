@@ -27,11 +27,14 @@
 	autosetuprebase = always
 [merge]
 	tool = meld
-	
+[mergetool]
+	prompt = false
 [github]
 	user = emoszkowski
 [diff]
-	tool = ediff
+	tool = meld
 	guitool = meld
 [difftool]
 	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
