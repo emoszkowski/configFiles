@@ -10,30 +10,49 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ### Emacs setup
 
 # Setup julia-emacs mode
-if [ ! -d ~/.emacsconfig/julia-emacs ]; 
-then 
-    mkdir -p ~/.emacsconfig/julia-emacs 
-    git clone https://github.com/JuliaLang/julia-emacs.git ~/.emacsconfig/julia-emacs 
- else 
-     echo "$SCRIPTNAME: emacs-julia mode already installed" 
-fi 
+if [ ! -d ~/.emacsconfig/julia-emacs ];
+then
+    mkdir -p ~/.emacsconfig/julia-emacs
+    git clone https://github.com/JuliaLang/julia-emacs.git ~/.emacsconfig/julia-emacs
+ else
+     echo "$SCRIPTNAME: julia-emacs mode already installed"
+fi
+
+# Get anaphora (upon which julia-repl depends)
+if [ ! -d ~/.emacsconfig/anaphora ];
+then
+    mkdir -p ~/.emacsconfig/anaphora
+    git clone https://github.com/rolandwalker/anaphora.git ~/.emacsconfig/anaphora
+ else
+     echo "$SCRIPTNAME: julia-repl minor mode already installed"
+fi
+
+
+# Setup julia-repl minor mode to have a julia terminal within emacs
+if [ ! -d ~/.emacsconfig/julia-repl ];
+then
+    mkdir -p ~/.emacsconfig/julia-repl
+    git clone https://github.com/tpapp/julia-repl.git ~/.emacsconfig/julia-repl
+ else
+     echo "$SCRIPTNAME: julia-repl minor mode already installed"
+fi
 
 
 # ESS setup
 
-if [ ! -d ~/.emacsconfig/ESS ]; 
-then 
+if [ ! -d ~/.emacsconfig/ESS ];
+then
     mkdir -p ~/.emacsconfig/ESS
     git clone git://github.com/emacs-ess/ESS.git ~/.emacsconfig/ESS
-    
+
     # move to that directory and make all
     mydir="$( pwd)"
     cd ~/.emacsconfig/ESS
     make all
     cd $mydir
- else 
-    echo "$SCRIPTNAME: ESS already installed" 
-fi 
+ else
+    echo "$SCRIPTNAME: ESS already installed"
+fi
 
 # markdown mode
 if [ ! -d ~/.emacsconfig/markdown-mode ]; 
