@@ -10,4 +10,4 @@ home directory to the local copy of this repo.
 
 ## Attribution
 
-Thanks to Matt Cocci and Micah Smith for the majority of the useful stuff here.
+Thanks to Matt Cocci, Micah Smith, and Pearl Li for the majority of the useful stuff here.
