@@ -7,14 +7,15 @@
 	br  = branch
 	ch  = checkout
 	co  = commit
-	d   = difftool  
-	d   = difftool -g  
+	d   = difftool
+	d   = difftool -g
 	dc  = difftool
-	gr  = grep  
-	logp = log --graph --all --full-history --color --pretty=format:'%C(yellow)%h%Creset%x09%Cblue%d%Creset %s <%an>'  
-	lg  = log --graph --all --full-history --color --abbrev-commit --decorate  
-	m   = mergetool --tool=meld 
+	gr  = grep
+	logp = log --graph --all --full-history --color --pretty=format:'%C(yellow)%h%Creset%x09%Cblue%d%Creset %s <%an>'
+	lg  = log --graph --all --full-history --color --abbrev-commit --decorate
+	m   = mergetool --tool=meld
 	st  = status
+	unstage = reset HEAD
 [core]
 [core]
 	editor = emacs -nw
