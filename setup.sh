@@ -55,33 +55,33 @@ then
 fi
 
 # markdown mode
-if [ ! -d ~/.emacsconfig/markdown-mode ]; 
-then 
+if [ ! -d ~/.emacsconfig/markdown-mode ];
+then
     mkdir -p ~/.emacsconfig/markdown-mode
     git clone https://github.com/jrblevin/markdown-mode.git ~/.emacsconfig/markdown-mode
-fi 
-# Grip 
+fi
+# Grip
 
 
-### Bash setup 
+### Bash setup
 
-# Setup git-aware-prompt 
-if [ ! -d ~/.bash/git-aware-prompt ]; 
-then 
-    mkdir -p ~/.bash/git-aware-prompt 
-     git clone https://github.com/jimeh/git-aware-prompt.git ~/.bash/git-aware-prompt 
- else 
-     echo "$SCRIPTNAME: git-aware-prompt already installed" 
-fi 
+# Setup git-aware-prompt
+if [ ! -d ~/.bash/git-aware-prompt ];
+then
+    mkdir -p ~/.bash/git-aware-prompt
+     git clone https://github.com/jimeh/git-aware-prompt.git ~/.bash/git-aware-prompt
+ else
+     echo "$SCRIPTNAME: git-aware-prompt already installed"
+fi
 
 
 # Setup Jawn
-if [ ! -d ~/Jawn ]; 
-then 
+if [ ! -d ~/Jawn ];
+then
     mkdir -p ~/Jawn
     git clone https://github.com/MattCocci/Jawn.git ~/Jawn
- else 
-    echo "$SCRIPTNAME: Jawn already installed" 
+ else
+    echo "$SCRIPTNAME: Jawn already installed"
 fi
 
 
