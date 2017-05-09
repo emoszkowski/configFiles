@@ -139,8 +139,8 @@
 (add-to-list 'load-path "~/.emacsconfig/anaphora")
 (require 'anaphora)
 
-
 ;; Julia REPL, for a more functioning REPL within emacs
+;; Note: this only works with Emacs 25+
 (add-to-list 'load-path "~/.emacsconfig/julia-repl")
 (require 'julia-repl)
 (add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
@@ -149,7 +149,6 @@
 (load "~/.emacsconfig/ESS/lisp/ess-site.el")
 (setq inferior-julia-program-name "/usr/local/bin/julia-0.4.2")
 (add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
-
 
 ;;MATLAB
 (add-to-list 'load-path "~/.emacs.d/")
