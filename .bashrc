@@ -114,6 +114,7 @@ export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]
 alias gs='git status'
 alias ga='git add'
 alias gcm='git commit -m'
+alias gca='git commit --amend'
 alias gg='git grep'
 alias gd='git diff'
 
