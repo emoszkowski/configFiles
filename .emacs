@@ -115,18 +115,21 @@
 ;; Markdown formatting
 (add-to-list 'load-path "~/.emacsconfig/markdown-mode/")
 (load "~/.emacs.d/cl-lib-0.5.el")
-(require 'markdown-mode)
+;(require 'markdown-mode)
 
-;; (load "markdown-mode.el")
+(load "markdown-mode.el")
 ;; (autoload 'markdown-mode "markdown-mode"
 ;;    "Major mode for editing Markdown files" t)
 ;; (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 
-;; (autoload 'gfm-mode "gfm-mode"
-;;    "Major mode for editing GitHub Flavored Markdown files" t)
-;; (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(autoload 'gfm-mode "gfm-mode"
+   "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+ (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
+ (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+
 
 ;; Julia
 (add-to-list 'load-path "~/.emacsconfig/julia-emacs")
