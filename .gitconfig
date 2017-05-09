@@ -17,7 +17,6 @@
 	st  = status
 	unstage = reset HEAD
 [core]
-[core]
 	editor = emacs -nw
 	trustctime = false
 	excludesfile = /home/rceexm08/.gitignore_global
@@ -39,3 +38,5 @@
 	prompt = false
 [difftool "meld"]
 	cmd = meld "$LOCAL" "$REMOTE"
+[pull]
+	rebase = true
