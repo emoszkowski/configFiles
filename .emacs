@@ -114,7 +114,7 @@
 
 ;; Markdown formatting
 (add-to-list 'load-path "~/.emacsconfig/markdown-mode/")
-(load "~/.emacs.d/cl-lib-0.5.el")
+(load "~/.emacsconfig/markdown-mode/tests/cl-lib-0.5.el")
 ;(require 'markdown-mode)
 
 (load "markdown-mode.el")
