@@ -45,6 +45,9 @@ stty -ixon       # Disable <C-s> that hangs terminal
 # Hide files from ls
 hide="--hide='*.aux' --hide='*.bbl' --hide='*.blg' --hide='*.fls' --hide='*.log' --hide='*.nav' --hide='*.out' --hide='*.snm' --hide='*.thm' --hide='*.toc' --hide='*~' --hide='*.cov'"
 
+# Read CSVs in bash
+lookcsv () { sed 's/,,/, ,/g;s/,,/, ,/g' $1 | column -s , -t | less;}
+
 # OS-specific aliases
 case $OSTYPE in
   cygwin*)
@@ -141,4 +144,3 @@ function gittree {
 
 # So the display doesn't come up for git
 unset SSH_ASKPASS
-
