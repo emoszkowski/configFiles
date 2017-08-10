@@ -105,8 +105,8 @@
 (set-face-foreground font-lock-builtin-face "brightmagenta")
 (set-face-foreground font-lock-comment-face "color-35") ; forest green
 (set-face-foreground font-lock-constant-face "brightcyan")
-(set-face-foreground font-lock-function-name-face "blue")
-(set-face-foreground font-lock-keyword-face "brightblue")
+(set-face-foreground font-lock-function-name-face "color-33") ; a bright blue I can see
+(set-face-foreground font-lock-keyword-face "color-45")
 (set-face-foreground font-lock-string-face "color-167") ; red
 (set-face-foreground font-lock-type-face "brightcyan")
 (set-face-foreground 'linum "brightblack")
