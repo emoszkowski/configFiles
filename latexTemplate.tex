@@ -1,160 +1,4 @@
-\documentclass[12pt]{article}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Load packages
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{fullpage}
-\usepackage{fancybox}
-\usepackage{enumitem} % Has to do with enumeration
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amsthm} % Allows for labeling of theorems
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\graphicspath{ {Figures/} }
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=blue,
-    urlcolor=black
-}
-\newtheorem{thm}{Theorem}[section]
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
-\usepackage{appendix}
-\usepackage{subfigure} % For plotting multiple figures at once
-\usepackage{verbatim}  % for including verbatim code from a file
-\usepackage{pdfpages}
-
-\usepackage{textcomp} % to get upquotes in listings environments.
-\usepackage{listings} % for texing code
-%\usepackage{alltt}
-%\usepackage{courier}
-\usepackage{xcolor}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Colors
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\definecolor{codegreen}{RGB}{28,172,0}
-\definecolor{codelilas}{RGB}{170,55,241}
-\definecolor{gray}{RGB}{120,120,120}
-\definecolor{LightGray}{gray}{.85}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Configure TeXed code 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Bash
-\lstdefinestyle{bash}{%
-  language=bash,%
-  basicstyle=\footnotesize\ttfamily,%
-  showstringspaces=false,%
-  commentstyle=\color{gray},%
-  keywordstyle=\color{blue},%
-  xleftmargin=0.25in,%
-  xrightmargin=0.25in,%
-  upquote=true
-}
-\newcommand\bashstyle{\lstset{style=bash}}
-
-%% MATLAB
-\lstdefinestyle{matlab}{%
-  language=Matlab,%
-  basicstyle=\footnotesize\ttfamily,%
-  breaklines=true,%
-  morekeywords={matlab2tikz},%
-  keywordstyle=\color{blue},%
-  morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},%
-  identifierstyle=\color{black},%
-  stringstyle=\color{codelilas},%
-  commentstyle=\color{codegreen},%
-  showstringspaces=false,%
-    %   Without this there will be a symbol in
-    %   the places where there is a space
-  emph=[1]{for,end,break,switch,case},emphstyle=[1]\color{blue},%
-    %   Some words to emphasise
-  upquote=true
-}
-\newcommand\matlabstyle{\lstset{style=matlab}}
-
-\newcommand{\matlabcode}[1]{%
-    \matlabstyle%
-    \lstinputlisting{#1}
-}
-
-%% Julia 
-
-% Highlight the 'julia>' prompt.
-% See http://tex.stackexchange.com/a/172076/50294 for the additional highlighting
-% See http://tex.stackexchange.com/a/180619/50294 for the '>' issue
-\makeatletter
-\lst@InstallKeywords k{attributes}{attributestyle}\slshape{attributestyle}{}ld
-\makeatother
-
-% (c) 2014 Jubobs
-% See http://tex.stackexchange.com/a/212794 
-\lstdefinelanguage{Julia}%
-{morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
-    end,export,false,for,function,immutable,import,importall,if,in,%
-    macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
-    using,while},%
-  sensitive=true,%
-  alsoother={\$},%
-  morecomment=[l]\#,%
-  morecomment=[n]{\#=}{=\#},%
-  morestring=[s]{"}{"},%
-  morestring=[m]{'}{'},%
-}[keywords,comments,strings]%
-
-
-\lstdefinestyle{julia}{%
-  language=Julia,%
-  basicstyle=\footnotesize\ttfamily,%
-  breaklines=true,%
-  keywordstyle=\bfseries\color{blue},%
-  identifierstyle=\color{black},%
-  stringstyle=\color{codegreen},%
-  commentstyle=\color{codelilas},%
-  showstringspaces=false,%
-  upquote=true,%
-  backgroundcolor=\color{LightGray},%
-  alsoletter={>},%
-  moreattributes={julia>}, %
-  attributestyle = \bfseries\color{green}, %
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-}
-\newcommand\juliastyle{\lstset{style=julia}}
-
-\newcommand{\juliacode}[1]{%
-    \juliastyle%
-    \lstinputlisting{#1}
-}
-
-
-% Set up in-line code snippets.
-% See http://tex.stackexchange.com/a/42964 and
-%     http://tex.stackexchange.com/a/83883/50294
-\newcommand\bashinline[1]{\colorbox{LightGray}{{\bashstyle\lstinline!#1!}}}
-\newcommand\matlabinline[1]{\colorbox{LightGray}{{\matlabstyle\lstinline!#1!}}}
-\newcommand\juliainline[1]{\colorbox{LightGray}{{\juliastyle\lstinline!#1!}}}
-\newcommand\genericinline[1]{\colorbox{LightGray}{#1}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Bibliographies
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{natbib}     % For bibliographies
-% \setlength{\bibsep}{3pt} % Set how far apart bibentries are
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Title
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{myarticle}
 
 \author{Erica Moszkowski}
 \title{Title}
@@ -187,7 +31,7 @@ Example code:
 
 %%%%% INCLUDING FIGURES %%%%%%%%%%%%%%%%%%%%%%%
 % (Assuming figures are stored in \graphicspath, in this case ./Figures/
-% 
+%
 %   % H indicates here
 %   \begin{figure}[h!]
 %      \centering
@@ -212,7 +56,7 @@ Example code:
 %% From file:
 % \verbatiminput{file.ext}    % Includes verbatim text from the file
 % \emph{text}                 % includes text in courier, or code-like, font
-% 
+%
 %% Block:
 % \lstset{style=julia}
 % \begin{lstlisting}
@@ -229,4 +73,3 @@ Example code:
 % \citep{label} % To cite in text in parentheses
 % \nocite{LabelInSourceFile} % Include a file in bibliography w/o specific citation in text
 % \bibliography{References} % Place at the end; References.bib is the citation info
-
