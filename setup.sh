@@ -92,7 +92,19 @@ case $OSTYPE in
 	    brew install tmux
 	fi
 
+	if [ ! ~/usr/local/bin/ipython ]
 
+	   brew install ipython3
+	   brew install pip3
+	   pip3 install numpy
+	   pip3 install scipy
+	   pip3 install ipython
+	   pip3 install statsmodels
+	   pip3 install seaborn
+	   pip3 install pandas
+	   pip3 install matplotlib
+
+	fi
 	;;
 esac
 
