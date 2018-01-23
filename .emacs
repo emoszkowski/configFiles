@@ -22,6 +22,9 @@
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
+;; default to not show menu bar
+(menu-bar-mode 0)
+
 ;; default to unified diffs
 (setq diff-switches "-u")
 
@@ -110,7 +113,7 @@
 (set-face-foreground font-lock-string-face "color-167") ; red
 (set-face-foreground font-lock-type-face "brightcyan")
 (set-face-foreground 'linum "brightblack")
-(set-face-foreground 'minibuffer-prompt "brightblue")
+(set-face-foreground 'minibuffer-prompt "color-33")
 
 ;; Markdown formatting
 (add-to-list 'load-path "~/.emacsconfig/markdown-mode/")
@@ -147,25 +150,31 @@
 
 ;; ESS, for running julia/R/etc from inside emacs
 (load "~/.emacsconfig/ESS/lisp/ess-site.el")
-(setq inferior-julia-program-name "/usr/local/bin/julia-0.4.2")
+(setq inferior-julia-program-name "/usr/local/bin/julia-0.6.0")
 (add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
 
-;;MATLAB
-(add-to-list 'load-path "~/.emacs.d/")
-(load "matlab.el")
 
+;; ; (require 'matlab)
+;; (require 'matlab-load)
+; (load-library "matlab-load")
+
+;;MATLAB
+(add-to-list 'load-path "~/.emacsconfig/matlab-emacs/")
+(require 'matlab)
+; (require 'matlab-load)
 (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
 (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
 (defun my-matlab-mode-hook ()
-(setq matlab-indent-function t) ; if you want function bodies indented
-(setq fill-column 80) ; where auto-fill should wrap
-(turn-on-auto-fill))
+  "Custom MATLAB hook"
+  (setq matlab-indent-function t) ; if you want function bodies indented
+  (setq fill-column 80) ; where auto-fill should wrap
+  (turn-on-auto-fill)
+  (setq matlab-comment-region-s "% "))
 (setq matlab-mode-hook 'my-matlab-mode-hook)
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 (defun my-matlab-shell-mode-hook ()
-'())
-(setq matlab-mode-hook 'my-matlab-mode-hook)
-; let me comment things out and format nicely in matlab
+  '())
+(add-hook matlab-mode-hook 'my-matlab-mode-hook)
 (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
 (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-q" nil)))
 
@@ -190,3 +199,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(font-latex-sectioning-5-face ((((type tty pc) (class color) (background light)) (:foreground "brightmagenta" :weight bold)))))
+
+;; unbind C-TAB for Mac compatibility
+(global-unset-key (kbd "C-TAB"))
