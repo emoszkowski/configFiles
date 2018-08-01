@@ -92,6 +92,11 @@ case $OSTYPE in
 	    brew install tmux
 	fi
 
+	# Font for Beamer
+	if [ ! -d $HOME/Library/Fonts ]
+	   git clone https://github.com/bBoxType/FiraSans.git $HOME/Library/Fonts/FiraSans
+	fi
+
 	if [ ! ~/usr/local/bin/ipython ]
 
 	   brew install ipython3
@@ -128,7 +133,6 @@ then
      echo "$SCRIPTNAME: julia-repl minor mode already installed"
 fi
 
-
 # Setup julia-repl minor mode to have a julia terminal within emacs
 if [ ! -d ~/.emacsconfig/julia-repl ];
 then
@@ -145,6 +149,15 @@ then
     git clone git://git.code.sf.net/p/matlab-emacs/src matlab-mode
 else
     echo "$SCRIPTNAME: matlab-mode already installed"
+fi
+
+# Get yaml mode
+if [ ! -d ~/.emacsconfig/yaml-mode ];
+then
+    mkdir -p ~/.emacsconfig/yaml-mode
+    git clone https://github.com/yoshiki/yaml-mode
+ else
+     echo "$SCRIPTNAME: emacs yaml-mode already installed"
 fi
 
 # Get MATLAB packages I like
@@ -214,3 +227,17 @@ do
         echo "$SCRIPTNAME: $FILE already linked"
     fi
 done
+
+### Beamer Template
+# See https://github.com/matze/mtheme for instructions
+if [ ! -d "$HOME/mtheme" ];
+then
+    git clone https://github.com/matze/mtheme.git $HOME
+    cwd=$(pwd)
+    cd $HOME/mtheme
+    make sty
+    make install
+
+    cd $cwd
+
+fi
