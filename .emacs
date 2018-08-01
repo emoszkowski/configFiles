@@ -133,6 +133,12 @@
  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
  (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
+;; YAML
+(add-to-list 'load-path "~/.emacsconfig/yaml-mode")
+(require 'yaml-mode)
+(add-hook 'yaml-mode-hook
+          (lambda ()
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Julia
 (add-to-list 'load-path "~/.emacsconfig/julia-emacs")
