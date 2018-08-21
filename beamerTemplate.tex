@@ -1,11 +1,32 @@
 \documentclass{mybeamer}
 
-% Title slide
+% Info
 \begin{document}
 \title{Title}
 \author{Erica Moszkowski}
 \institute{If you want one}
 \date{\today}
+
+% Footer
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Fill blocks
+\setbeamertemplate{blocks}[block=fill]
+
+% BEGIN DOCUMENT
+\begin{document}
 
 \begin{frame}
 \titlepage
