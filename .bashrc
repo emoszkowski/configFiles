@@ -104,7 +104,6 @@ cl(){
   c "$*" && ls
 }
 
-
 ### Git
 
 # Colorize PS1, and add git branch. See https://github.com/jimeh/git-aware-prompt.
