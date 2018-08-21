@@ -51,6 +51,11 @@ case $OSTYPE in
 	then
 	   brew cask install lyx
 	fi
+	# if [ ! -d $HOME/ ]
+	#    git clone https://github.com/ShiroTakeda/econ-bst.git $HOME/Library/Fonts/FiraSans
+	# fi
+
+
 
 	# Dropbox
 	if [ ! contains casks dropbox ]
