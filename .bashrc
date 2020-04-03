@@ -146,3 +146,6 @@ function gittree {
 
 # So the display doesn't come up for git
 unset SSH_ASKPASS
+
+# Source any local overrides
+source ~/.bashrc_local

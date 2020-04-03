@@ -3,6 +3,8 @@
 	email = erica.moszkowski@gmail.com
 [github]
 	emoszkowski
+[gitlab]
+	emoszkowski
 [alias]
 	br  = branch
 	ch  = checkout
