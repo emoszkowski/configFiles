@@ -5,6 +5,9 @@
 source ~/.paths          # Additions to path
 source ~/.aliases        # Aliases to machine-specific paths
 
+### Use anaconda instead of default python
+export PATH="$HOME/anaconda3/bin:$PATH"
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc

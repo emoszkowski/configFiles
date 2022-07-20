@@ -102,6 +102,8 @@ case $OSTYPE in
 	   git clone https://github.com/bBoxType/FiraSans.git $HOME/Library/Fonts/FiraSans
 	fi
 
+	# Python
+
 	if [ ! ~/usr/local/bin/ipython ]
 
 	   brew install ipython3
