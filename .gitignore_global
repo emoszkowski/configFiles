@@ -15,3 +15,7 @@
 *.out
 *.log
 *.toc
+
+# R-notebook generated HTML files #
+###################################
+*.html

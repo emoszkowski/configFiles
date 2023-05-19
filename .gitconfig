@@ -21,7 +21,7 @@
 [core]
 	editor = emacs -nw
 	trustctime = false
-	excludesfile = /home/rceexm08/.gitignore_global
+	excludesfile = /export/home/doctoral/emoszkowski/.gitignore_global
 [url "https://"]
 	insteadOf = git://
 	pushInsteadOf = git://

@@ -11,6 +11,21 @@
 ;;;; SETUP
 ;;;;;;;;;;;;;;;;;
 
+
+;; add to package archive so we can pull more packages
+(require 'package)
+;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+
+;; add use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-and-compile
+  (setq use-package-always-ensure t
+        use-package-expand-minimally t))
+
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
 
@@ -39,11 +54,11 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 (set-face-background 'show-paren-match "brightblack")
-(set-face-background 'show-paren-mismatch "color-167") ; red
+(set-face-background 'show-paren-mismatch "red") ; red
 
 ;; trailing whitespace
 (setq-default show-trailing-whitespace t)
-(set-face-background 'trailing-whitespace "color-167") ; red
+(set-face-background 'trailing-whitespace "brightred") ; red
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-set-key (kbd "C-x w") 'delete-trailing-whitespace)
 
@@ -105,21 +120,25 @@
 ;; colors
 (set-face-attribute 'region nil :inverse-video t)
 (set-face-foreground font-lock-builtin-face "brightmagenta")
-(set-face-foreground font-lock-comment-face "color-35") ; forest green
+(set-face-foreground font-lock-comment-face "forestgreen") ; forest green
 (set-face-foreground font-lock-constant-face "brightcyan")
-(set-face-foreground font-lock-function-name-face "color-33") ; a bright blue I can see
-(set-face-foreground font-lock-keyword-face "color-45")
-(set-face-foreground font-lock-string-face "color-167") ; red
+(set-face-foreground font-lock-function-name-face "blue") ; a bright blue I can see
+(set-face-foreground font-lock-keyword-face "brightblue")
+(set-face-foreground font-lock-string-face "brightred") ; red
 (set-face-foreground font-lock-type-face "brightcyan")
 (set-face-foreground 'linum "brightblack")
-(set-face-foreground 'minibuffer-prompt "color-33")
+(set-face-foreground 'minibuffer-prompt "brightblue")
 
 ;; Markdown formatting
-(add-to-list 'load-path "~/.emacsconfig/markdown-mode/")
-(load "~/.emacsconfig/markdown-mode/tests/cl-lib-0.5.el")
+;(use-package markdown-mode
+; :ensure t
+; :mode ("README\\.md\\'" . gfm-mode)
+; :init (setq markdown-command "multimarkdown"))
+;(add-to-list 'load-path "~/.emacsconfig/markdown-mode/")
+;(load "~/.emacsconfig/markdown-mode/tests/cl-lib-0.5.el")
 ;(require 'markdown-mode)
 
-(load "markdown-mode.el")
+;(load "markdown-mode.el")
 ;; (autoload 'markdown-mode "markdown-mode"
 ;;    "Major mode for editing Markdown files" t)
 ;; (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -133,55 +152,62 @@
  (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
 ;; YAML
-(add-to-list 'load-path "~/.emacsconfig/yaml-mode")
-(require 'yaml-mode)
-(add-hook 'yaml-mode-hook
-          (lambda ()
-            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+;(add-to-list 'load-path "~/.emacsconfig/yaml-mode")
+;(require 'yaml-mode)
+;(add-hook 'yaml-mode-hook
+;          (lambda ()
+;            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Julia
 (add-to-list 'load-path "~/.emacsconfig/julia-emacs")
 (require 'julia-mode)
 
 ;; Dependencies for Julia REPL
-(add-to-list 'load-path "~/.emacsconfig/anaphora")
-(require 'anaphora)
+;(add-to-list 'load-path "~/.emacsconfig/anaphora")
+;(require 'anaphora)
 
-;; Julia REPL, for a more functioning REPL within emacs
-;; Note: this only works with Emacs 25+
-(add-to-list 'load-path "~/.emacsconfig/julia-repl")
-(require 'julia-repl)
-(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
+;; ;; Julia REPL, for a more functioning REPL within emacs
+;; ;; Note: this only works with Emacs 25+
+;; (add-to-list 'load-path "~/.emacsconfig/julia-repl")
+;; (require 'julia-repl)
+;; (add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
+
 
 ;; ESS, for running julia/R/etc from inside emacs
-(load "~/.emacsconfig/ESS/lisp/ess-site.el")
-(setq inferior-julia-program-name "/usr/local/bin/julia-0.6.0")
-(add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
+(use-package ess
+ :ensure t
+ :init (require 'ess-site))
+
+;; (load "~/.emacsconfig/ESS/lisp/ess-site.el")
+;(require 'ess-site)
+(ess-toggle-underscore nil)
+;(setq inferior-julia-program-name "/usr/local/bin/julia-0.6.0")
+;(add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
 
 
-;; ; (require 'matlab)
+; ; (require 'matlab)
 ;; (require 'matlab-load)
 ; (load-library "matlab-load")
 
-;;MATLAB
-(add-to-list 'load-path "~/.emacsconfig/matlab-emacs/")
-(require 'matlab)
-; (require 'matlab-load)
-(autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
-(setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
-(defun my-matlab-mode-hook ()
-  "Custom MATLAB hook"
-  (setq matlab-indent-function t) ; if you want function bodies indented
-  (setq fill-column 80) ; where auto-fill should wrap
-  (turn-on-auto-fill)
-  (setq matlab-comment-region-s "% "))
-(setq matlab-mode-hook 'my-matlab-mode-hook)
-(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
-(defun my-matlab-shell-mode-hook ()
-  '())
-(add-hook matlab-mode-hook 'my-matlab-mode-hook)
-(add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
-(add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-q" nil)))
+;; ;;MATLAB
+;; (add-to-list 'load-path "~/.emacsconfig/matlab-emacs/")
+;; (require 'matlab)
+;; ; (require 'matlab-load)
+;; (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
+;; (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
+;; (defun my-matlab-mode-hook ()
+;;   "Custom MATLAB hook"
+;;   (setq matlab-indent-function t) ; if you want function bodies indented
+;;   (setq fill-column 80) ; where auto-fill should wrap
+;;   (turn-on-auto-fill)
+;;   (setq matlab-comment-region-s "% "))
+;; (setq matlab-mode-hook 'my-matlab-mode-hook)
+;; (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
+;; (defun my-matlab-shell-mode-hook ()
+;;   '())
+;; (add-hook matlab-mode-hook 'my-matlab-mode-hook)
+;; (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
+;; (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-q" nil)))
 
 ;; lunate epsilon
 (define-key key-translation-map (kbd "<f9> e <right>") (kbd "ϵ"))
