@@ -1,4 +1,4 @@
-# .bashrc
+# .zshrc
 
 ### Source other files
 
@@ -112,10 +112,18 @@ cl(){
 ### Git
 
 # Colorize PS1, and add git branch. See https://github.com/jimeh/git-aware-prompt.
-export GITAWAREPROMPT=~/.bash/git-aware-prompt
-source "${GITAWAREPROMPT}/main.sh" 2>/dev/null
+#export GITAWAREPROMPT=~/.bash/git-aware-prompt
+#source "${GITAWAREPROMPT}/main.sh" 2>/dev/null
 # export PS1="\[$(tput setaf 4)\][\[$(tput setaf 4)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 2)\]\W\[$(tput setaf 4)\] \[$ "
-export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+#export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+
+autoload -Uz compinit && compinit 
+
+# colorize 
+autoload -U colors && colors
+PS1="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[cyan]%}%m %{$fg[magenta]%}%~ %{$reset_color%}%% "
+
+
 
 # Aliases
 alias gs='git status'
@@ -150,4 +158,4 @@ function gittree {
 unset SSH_ASKPASS
 
 # Source any local overrides
-source ~/.bashrc_local
+#source ~/.zshrc_local
