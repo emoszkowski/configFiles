@@ -174,37 +174,29 @@
 
 
 ;; ESS, for running julia/R/etc from inside emacs
-(use-package ess
- :ensure t
- :init (require 'ess-site))
-
-;; (load "~/.emacsconfig/ESS/lisp/ess-site.el")
-;(require 'ess-site)
-(ess-toggle-underscore nil)
-;(setq inferior-julia-program-name "/usr/local/bin/julia-0.6.0")
-;(add-to-list 'load-path "~/.emacsconfig/ESS/lisp/")
+;; (use-package ess
+;; :ensure t
+;; :init (require 'ess-site))
+;;(ess-toggle-underscore nil)
 
 
-; ; (require 'matlab)
-;; (require 'matlab-load)
-; (load-library "matlab-load")
 
 ;; ;;MATLAB
 ;; (add-to-list 'load-path "~/.emacsconfig/matlab-emacs/")
 ;; (require 'matlab)
-;; ; (require 'matlab-load)
-;; (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
-;; (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
-;; (defun my-matlab-mode-hook ()
-;;   "Custom MATLAB hook"
-;;   (setq matlab-indent-function t) ; if you want function bodies indented
-;;   (setq fill-column 80) ; where auto-fill should wrap
-;;   (turn-on-auto-fill)
-;;   (setq matlab-comment-region-s "% "))
+;;; (require 'matlab-load)
+;;(autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
+;;(setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
+;;(defun my-matlab-mode-hook ()
+;;  "Custom MATLAB hook"
+;;  (setq matlab-indent-function t) ; if you want function bodies indented
+;;  (setq fill-column 80) ; where auto-fill should wrap
+;;  (turn-on-auto-fill)
+;;  (setq matlab-comment-region-s "% "))
 ;; (setq matlab-mode-hook 'my-matlab-mode-hook)
 ;; (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 ;; (defun my-matlab-shell-mode-hook ()
-;;   '())
+;;  '())
 ;; (add-hook matlab-mode-hook 'my-matlab-mode-hook)
 ;; (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-;" nil)))
 ;; (add-hook 'matlab-mode-hook (lambda () (local-set-key "\M-q" nil)))
@@ -216,6 +208,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style (quote post-forward-angle-brackets))
 
+
 ;; unbind C-o for tmux compatibility
 (global-unset-key (kbd "C-o"))
 (custom-set-variables
@@ -224,12 +217,31 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
-(custom-set-faces
+;;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(font-latex-sectioning-5-face ((((type tty pc) (class color) (background light)) (:foreground "brightmagenta" :weight bold)))))
+ ;;'(font-latex-sectioning-5-face ((((type tty pc) (class color) (background light)) (:foreground "brightmagenta" :weight bold)))))
+
+(custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+  ;'(default ((t (:inherit nil :stipple nil :background "lightyellow2" :foreground "gray20" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :width normal :family "liberation mono"))))
+  '(background "blue")
+  '(font-lock-builtin-face ((((class color) (background dark)) (:foreground "Turquoise"))))
+  '(font-lock-comment-face ((t (:foreground "MediumAquamarine"))))
+  '(font-lock-constant-face ((((class color) (background dark)) (:bold t :foreground "DarkOrchid"))))
+  '(font-lock-doc-string-face ((t (:foreground "green2"))))
+  '(font-lock-function-name-face ((t (:foreground "SkyBlue"))))
+  '(font-lock-keyword-face ((t (:bold t :foreground "CornflowerBlue"))))
+  '(font-lock-preprocessor-face ((t (:italic nil :foreground "CornFlowerBlue"))))
+  '(font-lock-reference-face ((t (:foreground "DodgerBlue"))))
+  '(font-lock-string-face ((t (:foreground "LimeGreen"))))
+)
+
 
 ;; unbind C-TAB for Mac compatibility
 (global-unset-key (kbd "C-TAB"))

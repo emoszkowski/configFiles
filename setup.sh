@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Erica Moszkowski
-# 
+#
 # setup.sh
 #   Set up all my configs: Downloads emacs plugins and modes, bash git
 #   prompt, and creates symlinks of relevant dot files in home directory
@@ -164,7 +164,7 @@ case $OSTYPE in
 	    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/ericamoszkowski/.zprofile
     	    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-            # key packages 
+            # key packages
             brew install coreutils
 	    brew install emacs
 	    brew install git
@@ -182,6 +182,7 @@ case $OSTYPE in
             brew install --cask meld
             brew install --cask rstudio
             brew install --cask skim
+	    brew install --cask typora
 
             # The following are easier to build using Brew than in Julia
             brew install gcc   # HDF5.jl
@@ -203,7 +204,7 @@ case $OSTYPE in
 	#fi
 
         # Set environment variables
-        try_addpath "/Library/TeX/texbin" 0	   
+        try_addpath "/Library/TeX/texbin" 0
 
 	casks="$(brew list --cask)"
 
@@ -220,7 +221,7 @@ case $OSTYPE in
 	#    git clone https://github.com/ShiroTakeda/econ-bst.git $HOME/Library/Fonts/FiraSans
 	# fi
 
-	
+
 
 	# Dropbox
 	if [ ! contains casks dropbox ]
