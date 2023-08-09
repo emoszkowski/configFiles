@@ -374,9 +374,18 @@ fi
 if [ ! -d ~/.bash/git-aware-prompt ];
 then
     mkdir -p ~/.bash/git-aware-prompt
-     git clone https://github.com/jimeh/git-aware-prompt.git ~/.bash/git-aware-prompt
+    git clone https://github.com/jimeh/git-aware-prompt.git ~/.bash/git-aware-prompt
  else
      echo "$SCRIPTNAME: git-aware-prompt already installed"
+fi
+
+# Setup zsh git-aware-prompt
+if [ ! -d ~/zsh-git-prompt ];
+then
+    mkdir -p ~/zsh-git-prompt
+    git clone https://github.com/zsh-git-prompt/zsh-git-prompt.git ~/zsh-git-prompt
+ else
+     echo "$SCRIPTNAME: zsh-git-prompt already installed"
 fi
 
 
