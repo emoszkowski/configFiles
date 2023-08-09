@@ -117,12 +117,16 @@ cl(){
 # export PS1="\[$(tput setaf 4)\][\[$(tput setaf 4)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 2)\]\W\[$(tput setaf 4)\] \[$ "
 #export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
 
-autoload -Uz compinit && compinit 
+autoload -Uz compinit && compinit
 
-# colorize 
+# colorize
 autoload -U colors && colors
 PS1="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[cyan]%}%m %{$fg[magenta]%}%~ %{$reset_color%}%% "
 
+# git aware prompt for zsh (from https://github.com/zsh-git-prompt/zsh-git-prompt)
+source ~/zsh-git-prompt/zshrc.sh
+# an example prompt
+PROMPT='%B%m%~%b$(git_super_status) %# '
 
 
 # Aliases
