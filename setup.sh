@@ -149,6 +149,19 @@ try_addpath() {
 
 # OSX specific installs
 case $OSTYPE in
+    linux*) # Linux
+
+
+	mkdir -p ~/local/bin/
+
+	if [ ! -d $HOME/local/bin/julia-1.9.2/ ]
+	    wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.2-linux-x86_64.tar.gz
+	    tar zxvf julia-1.9.2-linux-x86_64.tar.gz -C ~/local/bin/
+	    rm julia-1.9.2-linux-x86_64.tar.gz
+	fi
+
+	;;
+
     darwin*) # OS X
 
 	# install brew and other useful things
@@ -430,7 +443,8 @@ else
     for file in $texfiles; do
 	echo "style and class files"
         echo "$file"
-        try_symlink "$file"
+	echo "source: $texdir/tex/latex/"
+        try_symlink "$texdir/tex/latex" "$file"
     done
 
 fi
@@ -439,7 +453,7 @@ fi
 # See https://github.com/matze/mtheme for instructions
 if [ ! -d "$HOME/mtheme" ];
 then
-    git clone https://github.com/matze/mtheme.git $HOME/
+    git clone https://github.com/matze/mtheme.git $HOME/mtheme/
     cwd=$(pwd)
     cd $HOME/mtheme
     make sty
