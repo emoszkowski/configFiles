@@ -13,8 +13,11 @@ fi
 
 
 ### Use anaconda instead of default python
-export PATH="$HOME/anaconda3/bin:$PATH"
-
+#export PATH="$HOME/anaconda3/bin:$PATH"
+export PATH=/usr/local/anaconda3/bin:$PATH
+export PATH=/opt/homebrew/anaconda3/bin:$PATH
+#export PATH=/usr/local/anaconda3/bin:$PATH
+export PYTHONPATH="~Dropbox/Research/Data/Willie Swett and Co/business-list/:$PYTHON"
 
 ### Display
 
