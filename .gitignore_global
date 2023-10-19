@@ -19,3 +19,4 @@
 # R-notebook generated HTML files #
 ###################################
 *.html
+*.Rhistory
