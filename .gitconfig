@@ -42,3 +42,9 @@
 	cmd = meld "$LOCAL" "$REMOTE"
 [pull]
 	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/local/app/rcs_bin/grid3/envs/rcs_2022.11/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/local/app/rcs_bin/grid3/envs/rcs_2022.11/bin/gh auth git-credential
