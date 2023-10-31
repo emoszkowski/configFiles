@@ -20,17 +20,17 @@ fi
 # reattach and run parse_display. May need to do this for every pane.
 
 # cache DISPLAY environment variable from outside tmux
-cache_display() {
-    echo "$DISPLAY" > ~/.DISPLAY
-    echo "DISPLAY cached as $DISPLAY"
-}
+##cache_display() {
+##    echo "$DISPLAY" > ~/.DISPLAY
+##    echo "DISPLAY cached as $DISPLAY"
+##}
 
 # parse cached DISPLAY enviroment variable within tmux
-parse_display() {
-    DISPLAY_OLD="$DISPLAY"
-    export DISPLAY="$(cat ~/.DISPLAY)"
-    echo "DISPLAY updated from $DISPLAY_OLD to $DISPLAY"
-}
+##parse_display() {
+##    DISPLAY_OLD="$DISPLAY"
+##    export DISPLAY="$(cat ~/.DISPLAY)"
+##    echo "DISPLAY updated from $DISPLAY_OLD to $DISPLAY"
+##}
 
 
 ### Editor
@@ -92,15 +92,15 @@ latestr(){
 }
 
 # Jawn from Matt Cocci; see https://github.com/MattCocci/Jawn
-function j()
-{
-  if [ -d $1 ]
-  then
-      cd $1
-  else
-      python jawn.py $1
-  fi
-}
+##function j()
+##{
+##  if [ -d $1 ]
+##  then
+##      cd $1
+##  else
+##      python jawn.py $1
+##  fi
+##}
 
 # Zsh-like cd + list the files in the directory
 cl(){
