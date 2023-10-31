@@ -20,17 +20,17 @@ fi
 # reattach and run parse_display. May need to do this for every pane.
 
 # cache DISPLAY environment variable from outside tmux
-##cache_display() {
-##    echo "$DISPLAY" > ~/.DISPLAY
-##    echo "DISPLAY cached as $DISPLAY"
-##}
+cache_display() {
+   echo "$DISPLAY" > ~/.DISPLAY
+   echo "DISPLAY cached as $DISPLAY"
+}
 
 # parse cached DISPLAY enviroment variable within tmux
-##parse_display() {
-##    DISPLAY_OLD="$DISPLAY"
-##    export DISPLAY="$(cat ~/.DISPLAY)"
-##    echo "DISPLAY updated from $DISPLAY_OLD to $DISPLAY"
-##}
+parse_display() {
+   DISPLAY_OLD="$DISPLAY"
+   export DISPLAY="$(cat ~/.DISPLAY)"
+   echo "DISPLAY updated from $DISPLAY_OLD to $DISPLAY"
+}
 
 
 ### Editor
