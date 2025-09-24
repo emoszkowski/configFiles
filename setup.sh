@@ -28,7 +28,7 @@ contains() {
 
 # Location of configFiles repo
 if [ -z "$1" ]; then
-    echo "${red}Run script using ./init.sh path/to/configFiles/repo${normal}"
+    echo "${red}Run script using ./setup.sh path/to/configFiles/repo${normal}"
     exit 1
 fi
 dotfile_dir=$1
@@ -154,11 +154,11 @@ case $OSTYPE in
 
 	mkdir -p ~/local/bin/
 
-	if [ ! -d $HOME/local/bin/julia-1.9.2/ ]
-	    wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.2-linux-x86_64.tar.gz
-	    tar zxvf julia-1.9.2-linux-x86_64.tar.gz -C ~/local/bin/
-	    rm julia-1.9.2-linux-x86_64.tar.gz
-	fi
+    if [ ! -d $HOME/local/bin/julia-1.9.2/ ]; then
+        wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.2-linux-x86_64.tar.gz
+        tar zxvf julia-1.9.2-linux-x86_64.tar.gz -C ~/local/bin/
+        rm julia-1.9.2-linux-x86_64.tar.gz
+    fi
 
 	;;
 
@@ -174,7 +174,7 @@ case $OSTYPE in
 	then
 	    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	    # add brew to path
-	    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/ericamoszkowski/.zprofile
+	    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     	    eval "$(/opt/homebrew/bin/brew shellenv)"
 
             # key packages
@@ -444,7 +444,8 @@ else
 	echo "style and class files"
         echo "$file"
 	echo "source: $texdir/tex/latex/"
-        try_symlink "$texdir/tex/latex" "$file"
+        #try_symlink "$texdir/tex/latex" "$file"
+	try_symlink "$file" "$texdir/tex/latex"
     done
 
 fi

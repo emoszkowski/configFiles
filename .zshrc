@@ -11,6 +11,11 @@ if [ -f /etc/zshrc ]; then
     . /etc/zshrc
 fi
 
+# Disable Apple's flaky auto-title updater
+unset -f update_terminal_cwd 2>/dev/null
+precmd_functions=(${precmd_functions:#update_terminal_cwd})
+chpwd_functions=(${chpwd_functions:#update_terminal_cwd})
+update_terminal_cwd() { :; }
 
 ### Use anaconda instead of default python
 #export PATH="$HOME/anaconda3/bin:$PATH"
