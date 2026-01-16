@@ -94,6 +94,10 @@ try_addpath() {
 try_symlink() {
     src=$1
     dst=${2:-$src}
+
+    echo "src: $src"
+    echo "dst: $dst"
+
     if [ -L "$dst" ]; then
         echo "${red}Did not link $(pwd)/$dst: symlink already exists${normal}"
     elif [ ! -f "$src" ]; then
@@ -413,7 +417,7 @@ fi
 
 
 ### Dotfiles
-for FILE in .bashrc .emacs .tmux.conf .gitconfig .gitignore_global;
+for FILE in .bashrc .zshrc .emacs .tmux.conf .gitconfig .gitignore_global;
 do
     echo $FILE
     if [ ! -h "$HOME/$FILE" ];
@@ -428,9 +432,10 @@ done
 
 ### TeX
 cd $dotfile_dir
-texfiles=$(find tex/latex -name "*.cls" -o -name "*.sty")
+texfiles=($(find tex/latex -name "*.cls" -o -name "*.sty"))
 bstfiles=$(find bibtex/bst -name "*.bst")
 
+echo "texfiles: $texfiles"
 if not_installed kpsewhich; then
     echo "${red}Didn't link TeX files: make sure /Library/TeX/texbin is in PATH and re-run init.sh${normal}"
 else
@@ -442,10 +447,10 @@ else
     cd "$texdir"
     for file in $texfiles; do
 	echo "style and class files"
-        echo "$file"
+        echo "file: $file"
 	echo "source: $texdir/tex/latex/"
         #try_symlink "$texdir/tex/latex" "$file"
-	try_symlink "$file" "$texdir/tex/latex"
+	try_symlink $file "$texdir/tex/latex/"
     done
 
 fi
