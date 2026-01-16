@@ -65,10 +65,35 @@
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
 
-;; line numbers
-(global-linum-mode t)
-(setq linum-format "%4d ")
-(global-set-key (kbd "C-x l") 'linum-mode)  ; turn off with C-x l
+
+;; Unified line number setup
+(if (boundp 'display-line-numbers)
+    ;; Emacs 26+ has built-in display-line-numbers
+    (progn
+      ;; Pad width like "%4d "
+      (setq display-line-numbers-width 4
+            display-line-numbers-width-start t) ; auto widen when needed
+      ;; Choose style: t = absolute, 'relative = relative, 'visual = relative by screen line
+      (setq display-line-numbers-type t)
+      (global-display-line-numbers-mode 1))
+  ;; Fallback for older Emacs (≤25)
+  (progn
+    (require 'linum)
+    (setq linum-format "%4d ")
+    (global-linum-mode 1)))
+
+
+;; Define a unified toggle command
+(defun my-toggle-line-numbers ()
+  "Toggle line numbers in the current buffer, works across Emacs versions."
+  (interactive)
+  (if (boundp 'display-line-numbers)
+      (display-line-numbers-mode 'toggle)
+    (linum-mode 'toggle)))
+
+;; Bind it to C-x 1 (or another key if you prefer)
+(global-set-key (kbd "C-x 1") #'my-toggle-line-numbers)
+
 
 ;; increment and decrement numbers using C-c = and C-c -
 (defun my-increment-number-decimal (&optional arg)
@@ -126,8 +151,11 @@
 (set-face-foreground font-lock-keyword-face "brightblue")
 (set-face-foreground font-lock-string-face "brightred") ; red
 (set-face-foreground font-lock-type-face "brightcyan")
-(set-face-foreground 'linum "brightblack")
 (set-face-foreground 'minibuffer-prompt "brightblue")
+;; Set line number color to "brightblack", old or new Emacs
+(dolist (face '(line-number linum))
+  (when (facep face)
+    (set-face-foreground face "brightblack")))
 
 ;; Markdown formatting
 ;(use-package markdown-mode
