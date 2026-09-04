@@ -53,6 +53,17 @@ cl() { cd "$*" && ls }
 lookcsv() { sed 's/,,/, ,/g;s/,,/, ,/g' $1 | column -s , -t | less }
 
 ### Git (beyond oh-my-zsh git plugin)
+# Short aliases ported from my old .bashrc. Defined here (after omz loads) so
+# they win. Note: this intentionally overrides a few oh-my-zsh git-plugin
+# aliases that mean something different -- gs (omz has none -> ghostscript!),
+# gcm (omz: git checkout main), gca (omz: git commit -v -a).
+alias gs='git status'
+alias ga='git add'
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gg='git grep'
+alias gd='git diff'
+
 alias githist='git log --graph --all --full-history --color --format=oneline --branches --abbrev-commit'
 alias gitlogp='git log --graph --all --full-history --color --pretty=format:"%h%x09%d%x20%s"'
 alias gitfiles='git ls-tree -r --name-only'
