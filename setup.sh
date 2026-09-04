@@ -21,8 +21,9 @@ green=$(tput setaf 2)
 
 # define contains function; this is important for later
 # usage: contains aList anItem
+# usage: contains "$aList" anItem
 contains() {
-    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && exit(0) || exit(1)
+    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]]
 }
 
 
@@ -37,14 +38,14 @@ dotfile_dir=$1
 # Usage: not_installed <program>
 # https://stackoverflow.com/a/677212
 not_installed() {
-    return ! command -v $1 &> /dev/null
+    ! command -v $1 &> /dev/null
 }
 
 # Make file if it doesn't already exist
 # Usage: maybe_touch <path>
 maybe_touch() {
     if [ ! -f "$1" ]; then
-        touch -p "$1"
+        mkdir -p "$(dirname "$1")" && touch "$1"
         if [ "$?" -eq 0 ]; then
             echo "${green}Created $1${normal}"
         else
@@ -180,34 +181,34 @@ case $OSTYPE in
 	    # add brew to path
 	    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     	    eval "$(/opt/homebrew/bin/brew shellenv)"
-
-            # key packages
-            brew install coreutils
-	    brew install emacs
-	    brew install git
-            brew install pandoc
-            brew install python
-	    brew install rename
-	    brew install r
-            brew install rsync
-	    brew install wget
-	    brew install zellij
-
-	    brew install --cask ghostty
-	    brew install --cask julia
-            brew install --cask lyx
-            brew install --cask mactex
-            brew install --cask meld
-            brew install --cask rstudio
-            brew install --cask skim
-	    brew install --cask typora
-
-            # The following are easier to build using Brew than in Julia
-            brew install gcc   # HDF5.jl
-            brew install cmake # Polynomials.jl
-
-
         fi
+
+        # Key packages. Kept OUTSIDE the install-brew branch above so they also
+        # get installed on a machine that already had brew. `brew install` is a
+        # no-op for anything already present, so this is safe to re-run.
+        brew install coreutils
+        brew install emacs
+        brew install git
+        brew install pandoc
+        brew install python
+        brew install rename
+        brew install r
+        brew install rsync
+        brew install wget
+        brew install zellij
+
+        brew install --cask ghostty
+        brew install --cask julia
+        brew install --cask lyx
+        brew install --cask mactex
+        brew install --cask meld
+        brew install --cask rstudio
+        brew install --cask skim
+        brew install --cask typora
+
+        # The following are easier to build using Brew than in Julia
+        brew install gcc   # HDF5.jl
+        brew install cmake # Polynomials.jl
 
 	#emacs_version="$(emacs --version | head -n 1 | awk '{print $NF}')"
 	#bad_emacs_version="22."
@@ -242,9 +243,9 @@ case $OSTYPE in
 
 
 	# Dropbox
-	if [ ! contains casks dropbox ]
+	if ! contains "$casks" dropbox
 	then
-	    brew cask install dropbox
+	    brew install --cask dropbox
 	fi
 
 	# Julia
@@ -335,38 +336,38 @@ then
 fi
 
 # Setup matlab mode
-if [ ! -d ~/.emacsconfig/matlab-mode ];
+if [ ! -d ~/.emacsconfig/matlab-mode/.git ];
 then
-    mkdir -p ~/.emacsconfig/matlab-mode
-    git clone git://git.code.sf.net/p/matlab-emacs/src matlab-mode
+    rmdir ~/.emacsconfig/matlab-mode 2>/dev/null
+    git clone https://git.code.sf.net/p/matlab-emacs/src ~/.emacsconfig/matlab-mode
 else
     echo "$SCRIPTNAME: matlab-mode already installed"
 fi
 
 # Get yaml mode
-if [ ! -d ~/.emacsconfig/yaml-mode ];
+if [ ! -d ~/.emacsconfig/yaml-mode/.git ];
 then
-    mkdir -p ~/.emacsconfig/yaml-mode
-    git clone https://github.com/yoshiki/yaml-mode
+    rmdir ~/.emacsconfig/yaml-mode 2>/dev/null
+    git clone https://github.com/yoshiki/yaml-mode ~/.emacsconfig/yaml-mode
  else
      echo "$SCRIPTNAME: emacs yaml-mode already installed"
 fi
 
 # Get MATLAB packages I like
-if [ ! -d ~/.matlabconfig/latexTable];
+if [ ! -d ~/.matlabconfig/latexTable ];
 then
-    mkdir -p ~/.matlabconfig/latexTable
-    git clone https://github.com/eliduenisch/latexTable.git
+    mkdir -p ~/.matlabconfig
+    git clone https://github.com/eliduenisch/latexTable.git ~/.matlabconfig/latexTable
 else
     echo "$SCRIPTNAME: matlab latexTable already installed"
 fi
 
 # ESS setup
 
-if [ ! -d ~/.emacsconfig/ESS ];
+if [ ! -d ~/.emacsconfig/ESS/.git ];
 then
-    mkdir -p ~/.emacsconfig/ESS
-    git clone git://github.com/emacs-ess/ESS.git ~/.emacsconfig/ESS
+    rmdir ~/.emacsconfig/ESS 2>/dev/null
+    git clone https://github.com/emacs-ess/ESS.git ~/.emacsconfig/ESS
 
     # move to that directory and make all
     mydir="$( pwd)"

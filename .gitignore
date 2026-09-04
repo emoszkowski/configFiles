@@ -1,1 +1,7 @@
 *.pdf
+
+# Emacs modes. setup.sh clones these into ~/.emacsconfig; an older version of
+# the script was missing the clone target and dropped them here instead.
+# Ignored so the stray copies never get committed into this repo.
+/matlab-mode/
+/yaml-mode/
