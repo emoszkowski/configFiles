@@ -1,0 +1,135 @@
+// Zellij config
+// Docs: https://zellij.dev/documentation/configuration
+//
+// Emacs-friendly setup. The problem: zellij's DEFAULT keybinds grab
+// Ctrl-p/n/b/s/t/o/g/h and many Alt- combos in *normal* mode -- all of which
+// emacs needs (C-p, C-n, C-b, C-s isearch, C-o, M-f, ...). So we clear the
+// defaults and put everything behind a single prefix key, exactly like the old
+// tmux `prefix C-o` workflow:
+//
+//   Ctrl-o            enter command mode (the "prefix")
+//   Ctrl-o Ctrl-o     send a literal C-o (open-line) through to emacs
+//   Ctrl-o <key>      run a zellij command (see bindings below)
+//
+// In normal mode zellij now intercepts NOTHING except Ctrl-o, so emacs gets a
+// completely clean keyboard.
+
+keybinds clear-defaults=true {
+    normal {
+        // The prefix. Everything else passes through to the terminal / emacs.
+        bind "Ctrl o" { SwitchToMode "tmux"; }
+    }
+
+    // "tmux" == our command mode, entered via the Ctrl-o prefix.
+    tmux {
+        // Double-tap Ctrl-o (or `o`) sends a literal C-o to the app. 15 = ^O.
+        bind "Ctrl o" { Write 15; SwitchToMode "normal"; }
+        bind "o"      { Write 15; SwitchToMode "normal"; }
+        bind "esc"    { SwitchToMode "normal"; }
+
+        // Splits (matches old tmux: | = side-by-side, _ / - = stacked)
+        bind "|" "\\" { NewPane "right"; SwitchToMode "normal"; }
+        bind "-" "_"  { NewPane "down";  SwitchToMode "normal"; }
+
+        // Pane focus
+        bind "h" "Left"  { MoveFocus "left";  SwitchToMode "normal"; }
+        bind "j" "Down"  { MoveFocus "down";  SwitchToMode "normal"; }
+        bind "k" "Up"    { MoveFocus "up";    SwitchToMode "normal"; }
+        bind "l" "Right" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "Tab"       { FocusNextPane; SwitchToMode "normal"; }
+
+        // Pane actions
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "f" { ToggleFloatingPanes; SwitchToMode "normal"; }
+        bind "w" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+        bind "e" { TogglePaneFrames; SwitchToMode "normal"; }
+
+        // Tabs
+        bind "c" { NewTab; SwitchToMode "normal"; }
+        bind "n" { GoToNextTab; SwitchToMode "normal"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "1" { GoToTab 1; SwitchToMode "normal"; }
+        bind "2" { GoToTab 2; SwitchToMode "normal"; }
+        bind "3" { GoToTab 3; SwitchToMode "normal"; }
+        bind "4" { GoToTab 4; SwitchToMode "normal"; }
+        bind "5" { GoToTab 5; SwitchToMode "normal"; }
+        bind "6" { GoToTab 6; SwitchToMode "normal"; }
+        bind "7" { GoToTab 7; SwitchToMode "normal"; }
+        bind "8" { GoToTab 8; SwitchToMode "normal"; }
+        bind "9" { GoToTab 9; SwitchToMode "normal"; }
+
+        // Enter sub-modes for rename / resize / scroll(copy)
+        bind "," { SwitchToMode "renametab"; }
+        bind "." { SwitchToMode "renamepane"; }
+        bind "r" { SwitchToMode "resize"; }
+        bind "[" { SwitchToMode "scroll"; }
+
+        // Session
+        bind "d" { Detach; }
+        bind "q" { Quit; }
+    }
+
+    // Resize mode: hjkl to grow, HJKL to shrink. Enter/esc to leave.
+    resize {
+        bind "h" "Left"  { Resize "Increase left"; }
+        bind "j" "Down"  { Resize "Increase down"; }
+        bind "k" "Up"    { Resize "Increase up"; }
+        bind "l" "Right" { Resize "Increase right"; }
+        bind "H" { Resize "Decrease left"; }
+        bind "J" { Resize "Decrease down"; }
+        bind "K" { Resize "Decrease up"; }
+        bind "L" { Resize "Decrease right"; }
+        bind "+" "=" { Resize "Increase"; }
+        bind "-" { Resize "Decrease"; }
+        bind "enter" "esc" { SwitchToMode "normal"; }
+    }
+
+    // Scroll / copy mode. emacs-style-ish; enter search with `/`.
+    scroll {
+        bind "j" "Down"     { ScrollDown; }
+        bind "k" "Up"       { ScrollUp; }
+        bind "Ctrl f" "PageDown" { PageScrollDown; }
+        bind "Ctrl b" "PageUp"   { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "G" { ScrollToBottom; }
+        bind "e" { EditScrollback; SwitchToMode "normal"; }
+        bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "enter" "esc" "q" { SwitchToMode "normal"; }
+    }
+
+    entersearch {
+        bind "enter" { SwitchToMode "search"; }
+        bind "esc"   { SwitchToMode "scroll"; }
+    }
+    search {
+        bind "n" { Search "down"; }
+        bind "p" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+        bind "enter" "esc" "q" { SwitchToMode "normal"; }
+    }
+
+    renametab {
+        bind "esc" { UndoRenameTab; SwitchToMode "tmux"; }
+        bind "enter" { SwitchToMode "normal"; }
+    }
+    renamepane {
+        bind "esc" { UndoRenamePane; SwitchToMode "tmux"; }
+        bind "enter" { SwitchToMode "normal"; }
+    }
+}
+
+// Mouse support (was `set -g mouse on` in tmux)
+mouse_mode true
+
+// Copy mode used emacs keys in tmux; keep pbcopy for the system clipboard.
+copy_command "pbcopy"
+
+// Larger scrollback, like the old tmux history-limit 50000
+scroll_buffer_size 50000
+
+// default_shell "zsh"
+// theme "default"

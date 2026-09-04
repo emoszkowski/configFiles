@@ -1,0 +1,10 @@
+# Ghostty config
+# Docs: https://ghostty.org/docs/config
+
+font-size = 13
+
+# Shell integration (enables features like working dir tracking, prompt marking)
+shell-integration = zsh
+
+# Install terminfo on remote hosts over ssh so ghostty renders correctly there
+shell-integration-features = ssh-terminfo
